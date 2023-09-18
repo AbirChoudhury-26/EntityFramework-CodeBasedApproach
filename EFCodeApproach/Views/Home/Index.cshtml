@@ -1,0 +1,74 @@
+﻿@model IEnumerable<EFCodeApproach.Models.Student> // IEnumerable is for holding data in form of list only
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1> Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+@{
+	if (TempData["insert_success "] != null)
+	{
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Success!!</strong> @TempData["insert_success "] 
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	}
+
+	if (TempData["update_success "] != null)
+	{
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Success!!</strong> @TempData["update_success "]
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	}
+
+	if (TempData["delete_success "] != null)
+	{
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Success!!</strong> @TempData["delete_success "]
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	}
+}
+
+@* DisplayNameFor : Used to Display column Name and headers used for HTML page used in Views *@
+@* DisplayFor:  Used to Display Database values for the Table to display in HTML Page*@
+
+
+<table class="table-light table-ordered table-hover table table-striped">
+	<thead>
+		<tr>
+			<th> @Html.DisplayNameFor(model=>model.Id)</th>
+			<th> @Html.DisplayNameFor(model=>model.Name)</th>
+			<th> @Html.DisplayNameFor(model=>model.Gender)</th>
+			<th> @Html.DisplayNameFor(model=>model.Age)</th>
+			<th class="standard-cell"> @Html.DisplayNameFor(model=>model.Standard)</th>
+			<th> Modifications</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@Html.DisplayFor(modelItem=>item.Id)</td>
+				<td>@Html.DisplayFor(modelItem=>item.Name)</td>
+				<td>@Html.DisplayFor(modelItem=>item.Gender)</td>
+				<td>@Html.DisplayFor(modelItem=>item.Age)</td>
+				<td class="standard-cell">@Html.DisplayFor(modelItem=>item.Standard)</td>
+			     <td>
+					<a asp-action="Edit" asp-route-id="@item.Id" class="link-success"  style="margin-right: 10px;font-weight:bold">Edit</a>
+					<a asp-action="Details" asp-route-id="@item.Id" class="link-primary" style="margin-right: 10px;font-weight:bold">Details</a>
+					<a asp-action="Delete" asp-route-id="@item.Id" class="link-danger" style="margin-right: 10px;font-weight:bold">Delete</a>
+				</td>
+			</tr>
+		}
+
+	</tbody>
+</table>
